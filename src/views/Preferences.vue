@@ -102,17 +102,17 @@ export default class Prefrences extends Vue {
 
     validateAndContinue(step: number) {
       this.e6 = step + 1;
-      // switch(step) {
-      //   case 2:
-      //     this.motivation ? this.e6 = step + 1 : this.swalInputError();
-      //     break;
-      //   case 3: 
-      //     this.numOfLessons ? this.e6 = step + 1 : this.swalInputError();
-      //     break;
-      //   case 4:
-      //     this.learningTimePrompt ? this.e6 = step + 1 : this.swalInputError();
-      //     break;
-      // }
+      switch(step) {
+        case 2:
+          this.motivation ? this.e6 = step + 1 : this.swalInputError();
+          break;
+        case 3: 
+          this.numOfLessons ? this.e6 = step + 1 : this.swalInputError();
+          break;
+        case 4:
+          this.learningTimePrompt ? this.e6 = step + 1 : this.swalInputError();
+          break;
+      }
     }
 
     swalInputError() {
@@ -122,7 +122,7 @@ export default class Prefrences extends Vue {
 
 
     async submit() {
-      // if(this.reminderTimePrompt && this.reminderTimePrompt! > this.learningTimePrompt!) {
+      if(this.reminderTimePrompt && this.reminderTimePrompt! > this.learningTimePrompt!) {
           await db.collection('users').doc(this.user.email).update({
               preferences: {
                   motivation: this.motivation,
@@ -132,9 +132,9 @@ export default class Prefrences extends Vue {
               }
           });
           this.$router.replace('profile');
-      // } else {
-      //     Vue.swal('Hold up...', 'Please enter a time that is after the previously set learning time', 'warning');
-      // }
+      } else {
+          Vue.swal('Hold up...', 'Please enter a time that is after the previously set learning time', 'warning');
+      }
 
         
     }
